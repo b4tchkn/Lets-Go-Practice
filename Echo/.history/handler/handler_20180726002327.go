@@ -15,6 +15,6 @@ func GreetingPage() echo.HandlerFunc {
 
 func MainPage() echo.HandlerFunc {
 	return func(c echo.Context) error { //c をいじって Request, Responseを色々する
-		return c.String(http.StatusOK, "Welcome to Main Page!")
+		return c.String(http.StatusOK, "")
 	}
 }

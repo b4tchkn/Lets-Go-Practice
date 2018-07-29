@@ -4,7 +4,6 @@ import (
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"./handler"
-	"./auth"
 )
 
 func main() {
@@ -14,11 +13,9 @@ func main() {
 	// 全てのリクエストで差し込みたいミドルウェア（ログとか）はここ
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
-	e.Use(interceptor.BasicAuth())
 
 	e.GET("/hello", handler.GreetingPage())
 	e.GET("/hello/:username", handler.GreetingPage())
-	e.GET("/main", handler.MainPage())
 
 	// サーバー起動
 	e.Start(":8888")

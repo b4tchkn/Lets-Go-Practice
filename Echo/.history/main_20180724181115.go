@@ -1,10 +1,9 @@
 package main
 
 import (
+	"./handler"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
-	"./handler"
-	"./auth"
 )
 
 func main() {
@@ -16,9 +15,8 @@ func main() {
 	e.Use(middleware.Recover())
 	e.Use(interceptor.BasicAuth())
 
-	e.GET("/hello", handler.GreetingPage())
-	e.GET("/hello/:username", handler.GreetingPage())
-	e.GET("/main", handler.MainPage())
+	e.GET("/hello", handler.MainPage())
+	e.GET("/hello/:username", handler.MainPage())
 
 	// サーバー起動
 	e.Start(":8888")
