@@ -8,16 +8,14 @@ import (
 )
 
 func main() {
-	sitekey := "6LcKjGYUAAAAAJT786TtMrlWSNWNFvD4Z1y1Vm04"
+	sitekey := "6Ldui2cUAAAAALg5fTPHG8iv7B1HCa1Zxh4Xf8XG"
 	re := recaptcha.R{
-		Secret: "6LcKjGYUAAAAAGlp3EfFvTxExxIu9t7J3udI9NjZ",
+		//Secret: "6LcKjGYUAAAAAGlp3EfFvTxExxIu9t7J3udI9NjZ",
 	}
 
-	//HTML記述
 	form := fmt.Sprintf(`
 		<html>
 			<head>
-			<title>reCAPTCHA</title>
 				<script src='https://www.google.com/recaptcha/api.js'></script>
 			</head>
 			<body>
@@ -29,13 +27,10 @@ func main() {
 		</html>
 	`, sitekey)
 
-	//認証画面出すハンドラ
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, form)
 	})
-	//認証結果画面だすハンドラ
 	http.HandleFunc("/submit", func(w http.ResponseWriter, r *http.Request) {
-		//実際の認証結果はisValidの中（true|false）
 		isValid := re.Verify(*r)
 		log.Printf("CAPTCHA AUTH RESULT: ", isValid)
 		if isValid {

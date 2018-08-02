@@ -35,7 +35,6 @@ func main() {
 	})
 	//認証結果画面だすハンドラ
 	http.HandleFunc("/submit", func(w http.ResponseWriter, r *http.Request) {
-		//実際の認証結果はisValidの中（true|false）
 		isValid := re.Verify(*r)
 		log.Printf("CAPTCHA AUTH RESULT: ", isValid)
 		if isValid {

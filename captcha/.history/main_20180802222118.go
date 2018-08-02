@@ -13,7 +13,6 @@ func main() {
 		Secret: "6LcKjGYUAAAAAGlp3EfFvTxExxIu9t7J3udI9NjZ",
 	}
 
-	//HTML記述
 	form := fmt.Sprintf(`
 		<html>
 			<head>
@@ -29,15 +28,12 @@ func main() {
 		</html>
 	`, sitekey)
 
-	//認証画面出すハンドラ
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, form)
 	})
-	//認証結果画面だすハンドラ
 	http.HandleFunc("/submit", func(w http.ResponseWriter, r *http.Request) {
-		//実際の認証結果はisValidの中（true|false）
 		isValid := re.Verify(*r)
-		log.Printf("CAPTCHA AUTH RESULT: ", isValid)
+		log.Printf("CAPTCHA AUTH RESULT: ", string(isValid))
 		if isValid {
 			fmt.Fprintf(w, "成功")
 		} else {
