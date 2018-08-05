@@ -38,10 +38,7 @@ func main() {
 	http.HandleFunc("/submit", func(w http.ResponseWriter, r *http.Request) {
 		//実際の認証結果はisValidの中（true|false）
 		isValid := re.Verify(*r)
-		log.Printf("Success: ", bool(isValid.Success))
-		log.Printf("ChallengeTs: ", isValid.ChallengeTs)
-		log.Printf("Hostname: ", isValid.Hostname)
-		log.Printf("ErrorCodes ", isValid.ErrorCodes)
+		log.Printf("Success: ", *(isValid.Success))
 
 		/*
 		if isValid {
@@ -52,9 +49,9 @@ func main() {
 		*/
 	})
 
-	log.Printf("\n Starting server on http://localhost:8110 . Check example by opening this url in browser.\n")
+	log.Printf("\n Starting server on http://localhost:8100 . Check example by opening this url in browser.\n")
 
-	err := http.ListenAndServe(":8110", nil)
+	err := http.ListenAndServe(":8100", nil)
 
 	if err != nil {
 		log.Fatalf("Could not start server. %s", err)

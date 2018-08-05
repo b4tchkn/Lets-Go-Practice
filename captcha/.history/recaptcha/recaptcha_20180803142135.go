@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"net/url"
 	"time"
-	"log"
 )
 
 // R type represents an object of Recaptcha and has public property Secret,
@@ -40,7 +39,6 @@ func (r *R) Verify(req http.Request) *googleResponse {
 func (r *R) VerifyResponse(response string) *googleResponse {
 	r.lastError = make([]string, 1)
 	client := &http.Client{Timeout: 5 * time.Second}
-	log.Printf("secret = %v\nresponce = %v\n", r.Secret, response)
 	resp, err := client.PostForm(postURL,
 		url.Values{"secret": {r.Secret}, "response": {response}})
 	if err != nil {

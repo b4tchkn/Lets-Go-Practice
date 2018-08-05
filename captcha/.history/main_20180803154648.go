@@ -52,9 +52,9 @@ func main() {
 		*/
 	})
 
-	log.Printf("\n Starting server on http://localhost:8110 . Check example by opening this url in browser.\n")
+	log.Printf("\n Starting server on http://localhost:8100 . Check example by opening this url in browser.\n")
 
-	err := http.ListenAndServe(":8110", nil)
+	err := http.ListenAndServe(":8100", nil)
 
 	if err != nil {
 		log.Fatalf("Could not start server. %s", err)
