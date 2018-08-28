@@ -1,7 +1,7 @@
 package main
 
 import (
-	//"encoding/json"
+	"encoding/json"
 	"net/url"
 	"os"
 	"fmt"
@@ -13,14 +13,14 @@ import (
 const ENDPOINT = "https://api.a3rt.recruit-tech.co.jp/talk/v1/smalltalk"
 
 type Results struct {
-	Perplexity string `json:"perplexity"`
+	Perplexity float64 `json:"perplexity"`
 	Reply string `json:"reply"`
 }
 
 type Responce struct {
-	Status string `json:"status"`
+	Status int `json:"status"`
 	Message string `json:"message"`
-	Results Results `json:"results"`
+	Results []Results `json:"results"`
 }
 
 func main() {
@@ -35,7 +35,8 @@ func main() {
 
 	values := url.Values{}
 	values.Add("apikey", apikey)
-	values.Add("query", "おはよう")
+	values.Add("query", "ハロー")
+
 
 	// http.PostForm(ENDPOINT, values)の中身
 	// https://api.a3rt.recruit-tech.co.jp/talk/v1/smalltalk?apikey=apikey&query=おはよう
@@ -51,13 +52,14 @@ func main() {
 		log.Fatal(err)
 	}
 
-	fmt.Printf(string(body))
-	/*
-	var responce Responce
-	err = json.Unmarshal(body, &responce)
+	jsonBytes := ([]byte)(body)
+	responce := new(Responce)
+	err = json.Unmarshal(jsonBytes, responce)
 
-	if err != nil {
+	if err := json.Unmarshal(jsonBytes, responce); err != nil {
 		log.Fatal("*json.Unmarshal*\n", err)
+		return
 	}
-	*/
+
+	fmt.Println(responce.Results[0].Reply)
 }
