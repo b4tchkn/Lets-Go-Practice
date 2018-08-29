@@ -25,14 +25,6 @@ type Responce struct {
 
 func main() {
 	apikey := os.Getenv("APIKEY")
-	/*
-	que := "おはよう"
-	q := map[string]string{
-		"apikey": apikey,
-		"query": que,
-	}
-	*/
-
 	values := url.Values{}
 	values.Add("apikey", apikey)
 	values.Add("query", "ハロー")
